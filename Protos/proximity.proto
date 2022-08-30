@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "geohash_proximity";
+
+package proximity;
+
+service GeoHashProximity{
+  rpc AddHash(HashRequest) returns (StringResult);
+  rpc RemoveHash(HashRequest) returns (StringResult);
+  rpc GetCloseHashes(HashDistanceRequest) returns (HashesListResult);
+}
+
+message HashRequest {
+  string hash = 1;
+}
+
+message HashDistanceRequest {
+  string hash = 1;
+  string distance = 2;
+}
+
+message StringResult {
+  string message = 1;
+}
+
+message HashesListResult {
+  repeated string items = 1 [packed = true];
+}
